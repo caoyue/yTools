@@ -14,6 +14,13 @@ namespace yTools.Common
 
         public static Config Load(string path)
         {
+            if (!File.Exists(path))
+            {
+                var json = JsonConvert.SerializeObject(new Config());
+                File.WriteAllText(path, json);
+                return null;
+            }
+
             try
             {
                 string json = File.ReadAllText(path);
